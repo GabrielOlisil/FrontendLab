@@ -44,7 +44,7 @@ import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlu
         </li>
 
          <li>
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Dashboard">
             <!-- Home icon -->
              <LayoutDashboard  class="my-1.5 inline-block size-4" />
             <span class="is-drawer-close:hidden">Dashboard</span>
@@ -53,7 +53,7 @@ import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlu
 
 
         <li>
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Ambientes">
             <!-- Home icon -->
              <BookmarkPlus  class="my-1.5 inline-block size-4" />
             <span class="is-drawer-close:hidden">Ambientes</span>
@@ -61,7 +61,7 @@ import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlu
         </li>
         
         <li>
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Ambientes">
             <!-- Home icon -->
              <Landmark  class="my-1.5 inline-block size-4" />
             <span class="is-drawer-close:hidden">Ambientes</span>
