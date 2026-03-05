@@ -53,10 +53,10 @@ import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlu
 
 
         <li>
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Ambientes">
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Reservas">
             <!-- Home icon -->
              <BookmarkPlus  class="my-1.5 inline-block size-4" />
-            <span class="is-drawer-close:hidden">Ambientes</span>
+            <span class="is-drawer-close:hidden">Reservas</span>
           </button>
         </li>
         
