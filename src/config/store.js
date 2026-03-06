@@ -26,11 +26,10 @@ export const useAuthStore = defineStore('auth', () => {
 
     async function logout() {
 
-        /* 
-            TODO
-            IMPLEMENTAR REFRESH SESSION CLEANING
-        
-        */
+
+        let res = await instance.post("user/logout")
+
+        console.log(res.data);
 
         token.value = null;
         localStorage.removeItem(ACCESS_TOKEN_KEY)

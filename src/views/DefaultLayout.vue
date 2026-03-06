@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlus, Plus, LogOut } from 'lucide-vue-next';
 import { onMounted, ref, watch } from 'vue';
 
@@ -34,10 +34,11 @@ onMounted(async () => {
 
   let value = await hasLogged();
 
-  console.log("logou: " + value)
 
 
   if(!value){
+      
+
     console.log("não esta logado")
     router.push('/auth/login')
   } 
@@ -64,7 +65,7 @@ onMounted(async () => {
          <PanelLeftOpen class="my-1.5 inline-block size-4 "/>
       </label>
       <div class="px-4 ">
-        <p>Bem Vindo {{nome}}</p>
+        <p>Bem Vindo {{nome}} </p>
       </div>
       <button class="btn btn-primary">
         <Plus/>
@@ -83,17 +84,15 @@ onMounted(async () => {
     <div class="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64 ">
       <!-- Sidebar content here -->
       <ul class="menu w-full grow bg-primary text-primary-content   ">
-        <!-- List item -->
-        <li>
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-            <!-- Home icon -->
-             <House  class="my-1.5 inline-block size-4" />
-            <span class="is-drawer-close:hidden">Homepage</span>
-          </button>
-        </li>
+  
 
          <li>
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Dashboard">
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right bg-base-100 text-base-content" v-if=" $route.name == 'dashboard' " data-tip="Dashboard">
+            <!-- Home icon -->
+             <LayoutDashboard  class="my-1.5 inline-block size-4" />
+            <span class="is-drawer-close:hidden">Dashboard</span>
+          </button>
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right " v-else data-tip="Dashboard">
             <!-- Home icon -->
              <LayoutDashboard  class="my-1.5 inline-block size-4" />
             <span class="is-drawer-close:hidden">Dashboard</span>

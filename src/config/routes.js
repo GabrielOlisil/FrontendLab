@@ -7,7 +7,7 @@ import DefaultLayout from '@views/DefaultLayout.vue'
 import AuthLayout from '@views/AuthLayout.vue'
 
 const baseLayoutChildren = [
-  { path: '', component: HomeView },
+  { path: '', component: HomeView, name: "dashboard" },
   { path: 'about', component: AboutView }
 ]
 
