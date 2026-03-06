@@ -7,7 +7,7 @@ import { useAuthStore } from '@/config/store';
 const store = useAuthStore()
 
 
-const {token, refreshToken} = storeToRefs(store);
+const {token} = storeToRefs(store);
 
 </script>
 
@@ -16,6 +16,5 @@ const {token, refreshToken} = storeToRefs(store);
 
 
     <p>Store Token: {{ token }}</p>
-    <p>Store Refresh Token: {{ refreshToken }}</p>
   
 </template>

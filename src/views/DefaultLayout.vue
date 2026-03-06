@@ -1,6 +1,55 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlus, Plus } from 'lucide-vue-next';
+import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlus, Plus, LogOut } from 'lucide-vue-next';
+import { onMounted, ref, watch } from 'vue';
+
+import {jwtDecode} from "jwt-decode";
+
+import { useAuthStore } from '@/config/store';
+
+import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+
+
+const store = useAuthStore()
+const router = useRouter();
+
+const {hasLogged, logout} = store
+
+const {token} = storeToRefs(store)
+
+watch(token, (newToken) => {
+    if (!newToken){
+        router.push("/auth/login")
+    }
+})
+
+
+const nome = ref()
+
+
+
+onMounted(async () => {
+
+
+  let value = await hasLogged();
+
+  console.log("logou: " + value)
+
+
+  if(!value){
+    console.log("não esta logado")
+    router.push('/auth/login')
+  } 
+
+  const decodedToken = jwtDecode(token.value)
+  
+  nome.value = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+  
+
+
+})
+
 
 </script>
 
@@ -15,7 +64,7 @@ import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlu
          <PanelLeftOpen class="my-1.5 inline-block size-4 "/>
       </label>
       <div class="px-4 ">
-        <p>Bem Vindo Gabriel</p>
+        <p>Bem Vindo {{nome}}</p>
       </div>
       <button class="btn btn-primary">
         <Plus/>
@@ -75,6 +124,16 @@ import { House, PanelLeftOpen, Settings2, LayoutDashboard, Landmark, BookmarkPlu
             <!-- Settings icon -->
             <Settings2 class="my-1.5 inline-block size-4"  />
             <span class="is-drawer-close:hidden">Settings</span>
+          </button>
+        </li>
+
+
+        <!-- List item -->
+        <li>
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Sair" @click="logout">
+            <!-- Settings icon -->
+            <LogOut class="my-1.5 inline-block size-4"  />
+            <span class="is-drawer-close:hidden">Sair</span>
           </button>
         </li>
       </ul>

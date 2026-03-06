@@ -1,27 +1,64 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import instance from './api'
+
+const ACCESS_TOKEN_KEY = "access-token"
 
 
 export const useAuthStore = defineStore('auth', () => {
 
-    const token = ref('')
-    const refreshToken = ref('')
+    const token = ref()
 
 
-    async function login(username, senha) {
-
-        console.log(username, senha)
+    async function login(matricula, senha) {
 
 
-        let res = await instance.get('up')
 
-        token.value = 'token + ' + res.data.status
+        let res = await instance.post('user/login', {
+            userName: matricula,
+            passWord: senha
+        })
+        if (res.status == 200) {
+            token.value = res.data.token
+        }
+        console.log(token.value)
+    }
 
-        refreshToken.value = 'refreshToken + ' + res.data.status
+    async function logout() {
 
+        /* 
+            TODO
+            IMPLEMENTAR REFRESH SESSION CLEANING
+        
+        */
+
+        token.value = null;
+        localStorage.removeItem(ACCESS_TOKEN_KEY)
+    }
+
+    watch(token, (newToken) => {
+
+
+        if (newToken) {
+
+            localStorage.setItem(ACCESS_TOKEN_KEY, newToken)
+            console.log("novo token armazenado")
+        }
+    })
+
+    async function hasLogged() {
+
+        const storedToken = localStorage.getItem(ACCESS_TOKEN_KEY);
+
+        if (storedToken != null) {
+            token.value = storedToken
+            return true
+        }
+
+        console.log('token undefined')
+        return false;
 
     }
 
-    return { token, refreshToken, login }
+    return { token, login, hasLogged, logout }
 })
