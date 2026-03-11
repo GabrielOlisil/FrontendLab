@@ -14,6 +14,8 @@ import { storeToRefs } from 'pinia';
 const store = useAuthStore()
 const router = useRouter();
 
+const redirectTohome = () => router.push("/")
+
 const {hasLogged, logout} = store
 
 const {token} = storeToRefs(store)
@@ -45,7 +47,7 @@ onMounted(async () => {
 
   const decodedToken = jwtDecode(token.value)
   
-  nome.value = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+  nome.value = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
   
 
 
@@ -73,7 +75,7 @@ onMounted(async () => {
       </button>
     </nav>
     <!-- Page content here -->
-    <div class="p-4">
+    <div >
     <RouterView/>
 
     </div>
@@ -86,8 +88,8 @@ onMounted(async () => {
       <ul class="menu w-full grow bg-primary text-primary-content   ">
   
 
-         <li>
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right bg-base-100 text-base-content" v-if=" $route.name == 'dashboard' " data-tip="Dashboard">
+         <li @click=redirectTohome>
+          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right bg-base-100 text-base-content" v-if=" $route.name == 'dashboard' " data-tip="Dashboard" >
             <!-- Home icon -->
              <LayoutDashboard  class="my-1.5 inline-block size-4" />
             <span class="is-drawer-close:hidden">Dashboard</span>

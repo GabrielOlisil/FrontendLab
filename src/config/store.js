@@ -24,15 +24,36 @@ export const useAuthStore = defineStore('auth', () => {
         console.log(token.value)
     }
 
+
+    async function login(matricula) {
+
+
+
+        let res = await instance.post('user/loginprof', {
+            matricula: matricula,
+        })
+        if (res.status == 200) {
+            token.value = res.data.token
+        }
+        console.log(token.value)
+    }
+
     async function logout() {
 
 
+        try{
         let res = await instance.post("user/logout")
 
-        console.log(res.data);
+        } catch {
+        console.log("Usuario não possui token de sessão");
 
-        token.value = null;
+        } finally {
+    token.value = null;
         localStorage.removeItem(ACCESS_TOKEN_KEY)
+        }
+
+
+        
     }
 
     watch(token, (newToken) => {

@@ -5,10 +5,12 @@ import HomeView from '@views/pages/HomeView.vue'
 import LoginView from '@views/pages/auth/LoginView.vue'
 import DefaultLayout from '@views/DefaultLayout.vue'
 import AuthLayout from '@views/AuthLayout.vue'
+import CalendarioAmbiente from '@views/pages/calendario/CalendarioAmbiente.vue'
 
 const baseLayoutChildren = [
   { path: '', component: HomeView, name: "dashboard" },
-  { path: 'about', component: AboutView }
+  { path: 'about', component: AboutView },
+  { path:"calendario/:slug/:dia", component: CalendarioAmbiente}
 ]
 
 const authChildren = [
